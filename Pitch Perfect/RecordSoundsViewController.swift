@@ -112,6 +112,14 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         pauseButton.hidden = true
         recordButton.enabled = true
         recordingLabel.hidden = false
+        
+        // Bold and Darken text for accessibility
+        if (UIAccessibilityIsBoldTextEnabled()) {
+            recordingLabel.font = UIFont(name: "Heiti SC Medium", size: 15)
+        }
+        if (UIAccessibilityDarkerSystemColorsEnabled()) {
+            recordingLabel.textColor = UIColor.blackColor()
+        }
         recordingLabel.text = "Tap to Record"
     }
     
