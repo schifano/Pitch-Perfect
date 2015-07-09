@@ -16,8 +16,6 @@ class PlaySoundsViewController: UIViewController {
     var receivedAudio:RecordedAudio!
     var audioEngine = AVAudioEngine()!
     
-    // FIXME: Add accessibility
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -57,9 +55,7 @@ class PlaySoundsViewController: UIViewController {
         :param: rate The playback rate value
     */
     func playAudioWithVariableRate(rate: Float) {
-        audioPlayer.stop()
-        audioEngine.stop()
-        audioEngine.reset()
+        stopAudio()
         audioPlayer.rate = rate
         audioPlayer.currentTime = 0.0 // play from beginning
         audioPlayer.play()
@@ -124,9 +120,7 @@ class PlaySoundsViewController: UIViewController {
         :parm: effect The effect subclassed within AVAudioUnit
     */
     func playAudioWithEffect(effect: AVAudioUnit) {
-        audioPlayer.stop()
-        audioEngine.stop()
-        audioEngine.reset()
+        stopAudio()
         
         var audioPlayerNode = AVAudioPlayerNode()
         audioEngine.attachNode(audioPlayerNode)
@@ -147,18 +141,9 @@ class PlaySoundsViewController: UIViewController {
     
         :param: sender The UIButton clicked on - stop button
     */
-    @IBAction func stopAudio(sender: UIButton) {
+    @IBAction func stopAudio() {
         audioPlayer.stop()
         audioEngine.stop()
+        audioEngine.reset()
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-       override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-       }
-    */
 }

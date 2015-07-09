@@ -84,7 +84,8 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             // Inherit from UIViewController, recordedAudio is obj that initiates segue
             self.performSegueWithIdentifier("stopRecording", sender: recordedAudio)
         } else {
-            println("Recording not successful")
+            // FIXME: Add alert to the iOS user.
+            println("Recording not successful.")
             recordButton.enabled = true // Record again
             stopButton.hidden = true
         }
@@ -102,14 +103,9 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         var audioSession = AVAudioSession.sharedInstance()
         audioSession.setActive(false, error: nil)
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        // When the view loads, hide the label
-    }
 
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         stopButton.hidden = true
         pauseButton.hidden = true
         recordButton.enabled = true
@@ -125,11 +121,6 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         }
         recordingLabel.text = "Tap to Record"
         recordingLabel.accessibilityHint = "Tap the record button to begin recording audio"
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
