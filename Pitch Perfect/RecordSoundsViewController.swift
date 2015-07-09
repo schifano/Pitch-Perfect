@@ -33,6 +33,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         pauseButton.hidden = false
         recordingLabel.hidden = false
         recordingLabel.text = "Recording in Progress..."
+        recordingLabel.accessibilityHint = "Audio recording is currently in progress."
         
         // Check if a resume needs to occur due to previous pause
         if (paused) {
@@ -63,6 +64,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     @IBAction func pauseAudio(sender: UIButton) {
         audioRecorder.pause()
         recordingLabel.text = "Tap Record to Resume"
+        recordingLabel.accessibilityHint = "Tap the record button to resume recording audio"
         recordButton.enabled = true
         paused = true
     }
@@ -121,6 +123,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             recordingLabel.textColor = UIColor.blackColor()
         }
         recordingLabel.text = "Tap to Record"
+        recordingLabel.accessibilityHint = "Tap the record button to begin recording audio"
     }
     
     override func didReceiveMemoryWarning() {

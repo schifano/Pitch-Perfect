@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XCz-Ed-3UN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XCz-Ed-3UN">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -20,6 +20,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DBd-dE-7IF">
                                 <rect key="frame" x="157" y="265" width="100" height="100"/>
+                                <accessibility key="accessibilityConfiguration" hint="Begins recording audio." label="record"/>
                                 <state key="normal" image="record-button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -29,6 +30,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0d8-oC-vJk">
                                 <rect key="frame" x="232" y="666" width="50" height="50"/>
+                                <accessibility key="accessibilityConfiguration" hint="Stops the audio recording and switches to the effects screen." label="Stop"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="c6e-4u-Syj"/>
                                 </constraints>
@@ -41,6 +43,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vba-Lb-nGH">
                                 <rect key="frame" x="132" y="666" width="50" height="50"/>
+                                <accessibility key="accessibilityConfiguration" hint="Pauses the audio recording." label="Pause"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="vNO-yQ-H0k"/>
                                 </constraints>
@@ -53,6 +56,7 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recording in Progress..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZx-QT-Niw">
                                 <rect key="frame" x="118" y="414" width="178" height="16"/>
+                                <accessibility key="accessibilityConfiguration" hint="" label=""/>
                                 <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="16"/>
                                 <color key="textColor" red="0.047692560054509385" green="0.20651434497266752" blue="0.28973327020202022" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -101,6 +105,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hX4-3D-nkb">
                                         <rect key="frame" x="282" y="0.0" width="100" height="100"/>
+                                        <accessibility key="accessibilityConfiguration" hint="Plays back the audio using a faster rate." label="fast audio"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="hX4-3D-nkb" secondAttribute="height" multiplier="1:1" id="vIV-Ir-W58"/>
                                         </constraints>
@@ -113,6 +118,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zmg-Re-MXR">
                                         <rect key="frame" x="0.0" y="120" width="100" height="100"/>
+                                        <accessibility key="accessibilityConfiguration" hint="Plays back the audio using a higher pitch." label="chipmunk audio"/>
                                         <state key="normal" image="chipmunk@2x-iphone">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -122,6 +128,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ade-AQ-8hk">
                                         <rect key="frame" x="282" y="240" width="100" height="100"/>
+                                        <accessibility key="accessibilityConfiguration" hint="Plays back the audio using echo." label="echo audio"/>
                                         <state key="normal" image="echo@2x-iphone">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -131,6 +138,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5fW-Gz-nsa">
                                         <rect key="frame" x="0.0" y="240" width="100" height="100"/>
+                                        <accessibility key="accessibilityConfiguration" hint="Plays back the audio using reverb." label="reverb audio"/>
                                         <state key="normal" image="reverb@2x-iphone">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -140,6 +148,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pqh-GG-fTB">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                        <accessibility key="accessibilityConfiguration" hint="Plays back the audio using a slower rate." label="slow audio"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="pqh-GG-fTB" secondAttribute="height" multiplier="1:1" id="oJf-qg-lkz"/>
                                         </constraints>
@@ -152,6 +161,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wS0-k7-Xkk">
                                         <rect key="frame" x="282" y="120" width="100" height="100"/>
+                                        <accessibility key="accessibilityConfiguration" hint="Plays back the audio using a lower pitch." label="Darth Vader audio"/>
                                         <state key="normal" image="darthvader@2x-iphone">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -194,6 +204,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wfr-Fa-sR0">
                                 <rect key="frame" x="182" y="666" width="50" height="50"/>
+                                <accessibility key="accessibilityConfiguration" hint="Stops the audio from playing back." label="stop"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="wun-2X-tQb"/>
                                 </constraints>
