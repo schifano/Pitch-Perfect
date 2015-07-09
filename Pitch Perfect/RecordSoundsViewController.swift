@@ -114,6 +114,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         pauseButton.hidden = true
         recordButton.enabled = true
         recordingLabel.hidden = false
+        recordingLabel.isAccessibilityElement = true
         
         // Bold and Darken text for accessibility
         if (UIAccessibilityIsBoldTextEnabled()) {
