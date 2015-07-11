@@ -8,6 +8,7 @@
 
 import Foundation
 
+// FIXME: Create a struct
 /// Model within MVC
 class RecordedAudio {
     // Variables to store the filepath and title of the recorded audio

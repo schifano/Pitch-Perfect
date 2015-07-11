@@ -11,6 +11,7 @@ import AVFoundation
 
 class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
 
+    // FIXME: Adjust accessibility feature for recording
     // Declare global AVAudioRecorder variable
     var audioRecorder:AVAudioRecorder!
     // Create new object for the RecordedAudio class
@@ -50,6 +51,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             var session = AVAudioSession.sharedInstance()
             session.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
             
+            // FIXME: Add error alert for user
             audioRecorder = AVAudioRecorder(URL: filePath, settings: nil, error: nil)
             audioRecorder.delegate = self
             audioRecorder.meteringEnabled = true
