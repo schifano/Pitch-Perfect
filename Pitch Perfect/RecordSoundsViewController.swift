@@ -125,6 +125,9 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         recordingLabel.accessibilityHint = "Tap the record button to begin recording audio"
     }
     
+    /**
+        Function that segues the RecordSoundsVC to the PlaySoundsVC.
+    */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Important if multiple segues for a view controller
         if (segue.identifier == "stopRecording") {
