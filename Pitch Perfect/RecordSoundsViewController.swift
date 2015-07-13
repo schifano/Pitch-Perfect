@@ -84,6 +84,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             recordedAudio = RecordedAudio(filePathUrl: recorder.url, title: recorder.url.lastPathComponent!)
         
             // Inherit from UIViewController, recordedAudio is obj that initiates segue
+            // FIXME: Why does this not work when it changes to a struct?
             self.performSegueWithIdentifier("stopRecording", sender: recordedAudio)
         } else {
             // FIXME: Add alert to the iOS user.
