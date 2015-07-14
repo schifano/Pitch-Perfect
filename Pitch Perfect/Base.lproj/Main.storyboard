@@ -212,7 +212,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="stopAudio:" destination="C3x-yG-rTl" eventType="touchUpInside" id="Llc-CS-ssJ"/>
+                                    <action selector="stopAudio" destination="C3x-yG-rTl" eventType="touchUpInside" id="ITe-jo-UPf"/>
                                 </connections>
                             </button>
                         </subviews>

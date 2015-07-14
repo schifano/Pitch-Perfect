@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
+class RecordSoundsViewController: UIViewController {
 
     // FIXME: Adjust accessibility feature for recording
     // Declare global AVAudioRecorder variable
@@ -72,29 +72,6 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     /**
-        Checks if a recording has completed successfully or not.
-        This function is an AVAudioRecorder delegate.
-    
-        :param: recorder The audio recorder that has finished recording.
-        :param: flag A boolean value for success or failure
-    */
-    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder!, successfully flag: Bool) {
-        if (flag) {
-            // Initialize the recordedAudio object
-            recordedAudio = RecordedAudio(filePathUrl: recorder.url, title: recorder.url.lastPathComponent!)
-        
-            // Inherit from UIViewController, recordedAudio is obj that initiates segue
-            // FIXME: Why does this not work when it changes to a struct?
-            self.performSegueWithIdentifier("stopRecording", sender: recordedAudio)
-        } else {
-            // FIXME: Add alert to the iOS user.
-            println("Recording not successful.")
-            recordButton.enabled = true // Record again
-            stopButton.hidden = true
-        }
-    }
-    
-    /**
         Stops recording audio.
     
         :param: sender The UIButton - stop image
@@ -134,8 +111,32 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         if (segue.identifier == "stopRecording") {
             // Make destinationVC the correct type
             let playSoundsVC: PlaySoundsViewController = segue.destinationViewController as! PlaySoundsViewController
-            let data = sender as! RecordedAudio
-            playSoundsVC.receivedAudio = data
+            playSoundsVC.receivedAudio = recordedAudio
+        }
+    }
+}
+
+extension RecordSoundsViewController: AVAudioRecorderDelegate {
+    /**
+        Checks if a recording has completed successfully or not.
+        This function is an AVAudioRecorder delegate.
+        
+        :param: recorder The audio recorder that has finished recording.
+        :param: flag A boolean value for success or failure
+    */
+    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder!, successfully flag: Bool) {
+        if (flag) {
+            // Initialize the recordedAudio object
+            recordedAudio = RecordedAudio(filePathUrl: recorder.url, title: recorder.url.lastPathComponent!)
+            
+            // Inherit from UIViewController, recordedAudio is obj that initiates segue
+            // FIXME: Why does this not work when it changes to a struct?
+            self.performSegueWithIdentifier("stopRecording", sender: nil)
+        } else {
+            // FIXME: Add alert to the iOS user.
+            println("Recording not successful.")
+            recordButton.enabled = true // Record again
+            stopButton.hidden = true
         }
     }
 }
