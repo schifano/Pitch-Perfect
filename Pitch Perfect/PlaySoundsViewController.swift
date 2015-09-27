@@ -14,15 +14,15 @@ class PlaySoundsViewController: UIViewController {
     var audioFile: AVAudioFile!
     var audioPlayer:AVAudioPlayer!
     var receivedAudio:RecordedAudio!
-    var audioEngine = AVAudioEngine()!
+    var audioEngine = AVAudioEngine()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        audioPlayer = AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl, error: nil)
+        audioPlayer = try? AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl)
         audioPlayer.enableRate = true
         // Initialize, used to convert NSURL to AVAudioFile
-        audioFile = AVAudioFile(forReading: receivedAudio.filePathUrl, error: nil)
+        audioFile = try? AVAudioFile(forReading: receivedAudio.filePathUrl)
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,7 +34,7 @@ class PlaySoundsViewController: UIViewController {
     /**
         Plays back audio at a slower rate.
     
-        :param: sender The UIButton clicked on - snail image
+        - parameter sender: The UIButton clicked on - snail image
     */
     @IBAction func playSlowAudio(sender: UIButton) {
         playAudioWithVariableRate(0.5)
@@ -43,7 +43,7 @@ class PlaySoundsViewController: UIViewController {
     /**
         Plays back audio at a faster rate.
     
-        :param: sender The UIButton clicked on - rabbit image
+        - parameter sender: The UIButton clicked on - rabbit image
     */
     @IBAction func playFastAudio(sender: UIButton) {
         playAudioWithVariableRate(2.0)
@@ -52,7 +52,7 @@ class PlaySoundsViewController: UIViewController {
     /**
         Helper function for playing back audio at variable rates.
     
-        :param: rate The playback rate value
+        - parameter rate: The playback rate value
     */
     func playAudioWithVariableRate(rate: Float) {
         stopAudio()
@@ -64,7 +64,7 @@ class PlaySoundsViewController: UIViewController {
     /**
         Plays back audio at a higher pitch.
     
-        :param: sender The UIButton clicked on - chipmunk image
+        - parameter sender: The UIButton clicked on - chipmunk image
     */
     @IBAction func playChipmunkAudio(sender: UIButton) {
         playAudioWithVariablePitch(1000)
@@ -73,7 +73,7 @@ class PlaySoundsViewController: UIViewController {
     /**
         Plays back audio at a lower pitch.
     
-        :param: sender The UIButton clicked on - Darth Vader image
+        - parameter sender: The UIButton clicked on - Darth Vader image
     */
     @IBAction func playDarthVaderAudio(sender: UIButton) {
         playAudioWithVariablePitch(-1000)
@@ -82,10 +82,10 @@ class PlaySoundsViewController: UIViewController {
     /**
         Helper function for playing back audio at variable pitches.
     
-        :param: pitch The playback pitch value
+        - parameter pitch: The playback pitch value
     */
     func playAudioWithVariablePitch(pitch: Float) {
-        var pitchEffect = AVAudioUnitTimePitch()
+        let pitchEffect = AVAudioUnitTimePitch()
         pitchEffect.pitch = pitch
         playAudioWithEffect(pitchEffect)
     }
@@ -93,10 +93,10 @@ class PlaySoundsViewController: UIViewController {
     /**
         Plays back audio with echo (delayed) effect.
     
-        :param: sender The UIButton clicked on - the right circles button.
+        - parameter sender: The UIButton clicked on - the right circles button.
     */
     @IBAction func playAudioWithEcho(sender: UIButton) {
-        var delayEffect = AVAudioUnitDelay()
+        let delayEffect = AVAudioUnitDelay()
         delayEffect.wetDryMix = 50
         delayEffect.delayTime = 0.5
         playAudioWithEffect(delayEffect)
@@ -105,10 +105,10 @@ class PlaySoundsViewController: UIViewController {
     /**
         Plays back audio with reverb effect.
     
-        :param: sender The UIButton clicked on - the left circles button.
+        - parameter sender: The UIButton clicked on - the left circles button.
     */
     @IBAction func playAudioWithReverb(sender: UIButton) {
-        var reverbEffect = AVAudioUnitReverb()
+        let reverbEffect = AVAudioUnitReverb()
         reverbEffect.loadFactoryPreset(.LargeHall2)
         reverbEffect.wetDryMix = 50
         playAudioWithEffect(reverbEffect)
@@ -122,7 +122,7 @@ class PlaySoundsViewController: UIViewController {
     func playAudioWithEffect(effect: AVAudioUnit) {
         stopAudio()
         
-        var audioPlayerNode = AVAudioPlayerNode()
+        let audioPlayerNode = AVAudioPlayerNode()
         audioEngine.attachNode(audioPlayerNode)
         audioEngine.attachNode(effect)
 
@@ -131,15 +131,21 @@ class PlaySoundsViewController: UIViewController {
         
         audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
         
-        // Start and play audio engine
-        audioEngine.startAndReturnError(nil)
+        do
+        {
+            try audioEngine.start()
+        }
+        catch let error as NSError
+        {
+            print(error.description)
+        }
         audioPlayerNode.play()
     }
 
     /**
         Stops audio from playing back.
     
-        :param: sender The UIButton clicked on - stop button
+        - parameter sender: The UIButton clicked on - stop button
     */
     @IBAction func stopAudio() {
         audioPlayer.stop()

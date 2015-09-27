@@ -26,7 +26,7 @@ class RecordSoundsViewController: UIViewController {
     /**
         Records audio and hides the stop button and recording label.
     
-        :param: sender The UIButton clicked on - microphone button
+        - parameter sender: The UIButton clicked on - microphone button
     */
     @IBAction func recordAudio(sender: UIButton) {
         recordButton.enabled = false
@@ -41,18 +41,28 @@ class RecordSoundsViewController: UIViewController {
             audioRecorder.record()
         } else {
             // Prepare for recording audio
-            let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+            let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] 
             let recordingName = "my_audio.wav"
             let pathArray = [dirPath, recordingName]
             let filePath = NSURL.fileURLWithPathComponents(pathArray)
-            println(filePath)
+            print(filePath)
             
             // Create new recording session
-            var session = AVAudioSession.sharedInstance()
-            session.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
+            let session = AVAudioSession.sharedInstance()
+            do {
+                try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            } catch _ {
+            }
             
             // FIXME: Add error alert for user
-            audioRecorder = AVAudioRecorder(URL: filePath, settings: nil, error: nil)
+            do
+            {
+                audioRecorder = try AVAudioRecorder(URL:filePath!, settings:[:])
+            }
+            catch let error as NSError
+            {
+                print(error.description)
+            }
             audioRecorder.delegate = self
             audioRecorder.meteringEnabled = true
             audioRecorder.prepareToRecord()
@@ -74,14 +84,17 @@ class RecordSoundsViewController: UIViewController {
     /**
         Stops recording audio.
     
-        :param: sender The UIButton - stop image
+        - parameter sender: The UIButton - stop image
     */
     @IBAction func stopRecordingAudio(sender: UIButton) {
         recordingLabel.hidden = true
         
         audioRecorder.stop()
-        var audioSession = AVAudioSession.sharedInstance()
-        audioSession.setActive(false, error: nil)
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setActive(false)
+        } catch _ {
+        }
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -121,10 +134,10 @@ extension RecordSoundsViewController: AVAudioRecorderDelegate {
         Checks if a recording has completed successfully or not.
         This function is an AVAudioRecorder delegate.
         
-        :param: recorder The audio recorder that has finished recording.
-        :param: flag A boolean value for success or failure
+        - parameter recorder: The audio recorder that has finished recording.
+        - parameter flag: A boolean value for success or failure
     */
-    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder!, successfully flag: Bool) {
+    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
         if (flag) {
             // Initialize the recordedAudio object
             recordedAudio = RecordedAudio(filePathUrl: recorder.url, title: recorder.url.lastPathComponent!)
@@ -134,7 +147,7 @@ extension RecordSoundsViewController: AVAudioRecorderDelegate {
             self.performSegueWithIdentifier("stopRecording", sender: nil)
         } else {
             // FIXME: Add alert to the iOS user.
-            println("Recording not successful.")
+            print("Recording not successful.")
             recordButton.enabled = true // Record again
             stopButton.hidden = true
         }

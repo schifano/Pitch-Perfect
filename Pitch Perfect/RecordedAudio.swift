@@ -18,8 +18,8 @@ class RecordedAudio {
     /** 
         Initialized a new RecordedAudio object.
     
-        :param: filePathUrl
-        :param: title
+        - parameter filePathUrl:
+        - parameter title:
     
     */
     init(filePathUrl: NSURL, title: String) {
